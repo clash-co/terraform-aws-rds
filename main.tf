@@ -22,7 +22,7 @@ locals {
 resource "aws_db_instance" "default" {
   count = module.this.enabled ? 1 : 0
 
-  identifier            = module.this.id
+  identifier            = var.replicate_source_db != null ? "${module.this.id}-replica" : module.this.id
   name                  = var.database_name
   username              = var.database_user
   password              = var.database_password
